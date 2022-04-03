@@ -1,7 +1,8 @@
-# To do
-
+# To do project
 ## Technologies
-- Firebase
+- Firebase (SDK 8, to be compatible with FirebaseUI)
+  - Firebase Auth
+    - FirebaseUI
 - Create React App
 - TypeScript
 
