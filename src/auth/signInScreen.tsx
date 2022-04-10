@@ -6,6 +6,8 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 
+export type UserState = 'loading' | null | firebase.User;
+
 const uiConfig = {
   signInFlow: 'popup',
   signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
@@ -14,7 +16,11 @@ const uiConfig = {
   },
 };
 
-export default function SignInScreen({ setUser }) {
+export default function SignInScreen({
+  setUser,
+}: {
+  setUser: (user: UserState) => void;
+}) {
   const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
 
   // Listen to the Firebase Auth state and set the local state.
@@ -26,7 +32,7 @@ export default function SignInScreen({ setUser }) {
         setUser(user);
       });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-  }, []);
+  }, [setUser]);
 
   if (!isSignedIn) {
     return (

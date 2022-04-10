@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { db } from './firebase/firebase';
 import { collection, getDocs, addDoc } from 'firebase/firestore';
-import firebase from 'firebase/compat';
+import { UserState } from './auth/signInScreen';
 
 interface ToDoItem {
   text: string;
 }
 
-export default function ToDoList({ user }: { user: firebase.User | null }) {
+export default function ToDoList({ user }: { user: UserState }) {
   const [newToDoText, setNewToDoText] = useState('');
   const [todos, setTodos] = useState<ToDoItem[] | undefined>(undefined);
 
   let state;
-  if (!user) {
-    state = 'not-signed-in';
-  } else if (todos == null) {
+  if (user === 'loading' || todos == null) {
     state = 'loading';
+  } else if (user == null) {
+    state = 'not-signed-in';
   } else {
     state = 'loaded';
   }
