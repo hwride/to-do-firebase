@@ -9,7 +9,16 @@ interface ToDoItem {
 
 export default function ToDoList({ user }: { user: firebase.User | null }) {
   const [newToDoText, setNewToDoText] = useState('');
-  const [todos, setTodos] = useState<ToDoItem[]>([]);
+  const [todos, setTodos] = useState<ToDoItem[] | undefined>(undefined);
+
+  let state;
+  if (!user) {
+    state = 'not-signed-in';
+  } else if (todos == null) {
+    state = 'loading';
+  } else {
+    state = 'loaded';
+  }
 
   // Request to do items from the server when logged in.
   useEffect(() => {
@@ -21,30 +30,36 @@ export default function ToDoList({ user }: { user: firebase.User | null }) {
     }
   }, [user]);
 
-  return (
-    <div>
+  if (state === 'not-signed-in') {
+    return <div>Sign in to view to do items.</div>;
+  } else if (state === 'loading') {
+    return <div>Loading...</div>;
+  } else {
+    return (
       <div>
-        <input
-          type="text"
-          value={newToDoText}
-          onChange={(event) => {
-            setNewToDoText(event.target.value);
-          }}
-        />
-        <button onClick={() => addToDoItem(newToDoText)}>Add to do</button>
+        <div>
+          <input
+            type="text"
+            value={newToDoText}
+            onChange={(event) => {
+              setNewToDoText(event.target.value);
+            }}
+          />
+          <button onClick={() => addToDoItem(newToDoText)}>Add to do</button>
+        </div>
+        <ul>
+          {todos!.map((todo) => {
+            return (
+              <li key={todo.text}>
+                <input type="checkbox" />
+                {todo.text}
+              </li>
+            );
+          })}
+        </ul>
       </div>
-      <ul>
-        {todos.map((todo) => {
-          return (
-            <li key={todo.text}>
-              <input type="checkbox" />
-              {todo.text}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
+    );
+  }
 }
 
 async function addToDoItem(text: string) {
