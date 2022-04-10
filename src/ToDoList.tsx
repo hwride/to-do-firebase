@@ -7,28 +7,29 @@ interface ToDoItem {
   text: string;
 }
 
-export default function ToDoList({ user }: { user: UserState }) {
+export default function ToDoList({ userState }: { userState: UserState }) {
   const [newToDoText, setNewToDoText] = useState('');
   const [todos, setTodos] = useState<ToDoItem[] | undefined>(undefined);
 
   let state;
-  if (user === 'loading' || todos == null) {
-    state = 'loading';
-  } else if (user == 'not-signed-in') {
+  console.log('userState', userState);
+  if (userState == 'not-signed-in') {
     state = 'not-signed-in';
+  } else if (userState === 'loading' || todos == null) {
+    state = 'loading';
   } else {
     state = 'loaded';
   }
 
   // Request to do items from the server when logged in.
   useEffect(() => {
-    if (user) {
+    if (userState === 'signed-in') {
       (async () => {
         const todos = await getDocs(collection(db, 'todos'));
         setTodos(todos.docs.map((doc) => doc.data() as ToDoItem));
       })();
     }
-  }, [user]);
+  }, [userState]);
 
   if (state === 'not-signed-in') {
     return <div>Sign in to view to do items.</div>;

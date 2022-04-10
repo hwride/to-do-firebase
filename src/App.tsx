@@ -10,8 +10,8 @@ function App() {
   return (
     <div className="App">
       To do
-      <ToDoList user={user} />
-      <SignInScreen user={user} setUser={setUser} />
+      <ToDoList userState={user} />
+      <SignInScreen userState={user} setUserState={setUser} />
     </div>
   );
 }

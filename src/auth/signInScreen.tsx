@@ -5,7 +5,7 @@ import 'firebase/compat/auth';
 import React, { useEffect } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
-export type UserState = 'loading' | 'not-signed-in' | firebase.User;
+export type UserState = 'loading' | 'not-signed-in' | 'signed-in';
 
 const uiConfig = {
   signInFlow: 'popup',
@@ -16,25 +16,25 @@ const uiConfig = {
 };
 
 export default function SignInScreen({
-  user,
-  setUser,
+  userState,
+  setUserState,
 }: {
-  user: UserState;
-  setUser: (user: UserState) => void;
+  userState: UserState;
+  setUserState: (user: UserState) => void;
 }) {
   // Listen to the Firebase Auth state and set the local state.
   useEffect(() => {
     const unregisterAuthObserver = firebase
       .auth()
       .onAuthStateChanged((user) => {
-        setUser(user != null ? user : 'not-signed-in');
+        setUserState(user != null ? 'signed-in' : 'not-signed-in');
       });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-  }, [setUser]);
+  }, [setUserState]);
 
-  if (user === 'loading') {
+  if (userState === 'loading') {
     return null;
-  } else if (user == 'not-signed-in') {
+  } else if (userState == 'not-signed-in') {
     return (
       <div style={{ border: '1px solid black' }}>
         <p>Please sign-in:</p>
