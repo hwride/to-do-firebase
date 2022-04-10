@@ -7,6 +7,7 @@ interface ToDoItem {
 }
 
 export default function ToDoList() {
+  const [newToDoText, setNewToDoText] = useState('');
   const [todos, setTodos] = useState<ToDoItem[]>([]);
 
   // Request to do items from the server.
@@ -21,7 +22,16 @@ export default function ToDoList() {
 
   return (
     <div>
-      <button onClick={addToDoItem}>Add to do</button>
+      <div>
+        <input
+          type="text"
+          value={newToDoText}
+          onChange={(event) => {
+            setNewToDoText(event.target.value);
+          }}
+        />
+        <button onClick={() => addToDoItem(newToDoText)}>Add to do</button>
+      </div>
       <ul>
         {todos.map((todo) => {
           return (
@@ -36,11 +46,11 @@ export default function ToDoList() {
   );
 }
 
-async function addToDoItem() {
+async function addToDoItem(text: string) {
   try {
     const col = collection(db, 'todos');
     const docRef = await addDoc(col, {
-      text: 'Buy milk',
+      text,
     });
     console.log('Document written with ID: ', docRef.id);
   } catch (e) {
