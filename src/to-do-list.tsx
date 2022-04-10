@@ -14,7 +14,7 @@ export default function ToDoList({ user }: { user: UserState }) {
   let state;
   if (user === 'loading' || todos == null) {
     state = 'loading';
-  } else if (user == null) {
+  } else if (user == 'not-signed-in') {
     state = 'not-signed-in';
   } else {
     state = 'loaded';

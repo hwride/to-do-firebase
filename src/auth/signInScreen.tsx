@@ -5,7 +5,7 @@ import 'firebase/compat/auth';
 import React, { useEffect } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
-export type UserState = 'loading' | null | firebase.User;
+export type UserState = 'loading' | 'not-signed-in' | firebase.User;
 
 const uiConfig = {
   signInFlow: 'popup',
@@ -27,14 +27,14 @@ export default function SignInScreen({
     const unregisterAuthObserver = firebase
       .auth()
       .onAuthStateChanged((user) => {
-        setUser(user);
+        setUser(user != null ? user : 'not-signed-in');
       });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, [setUser]);
 
   if (user === 'loading') {
     return null;
-  } else if (user == null) {
+  } else if (user == 'not-signed-in') {
     return (
       <div style={{ border: '1px solid black' }}>
         <p>Please sign-in:</p>
