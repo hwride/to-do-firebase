@@ -1,7 +1,7 @@
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { db } from './firebase/firebase';
-import { collection, getDocs, addDoc } from 'firebase/firestore';
 import { UserState } from './auth/signInScreen';
+import { db } from './firebase/firebase';
 
 interface ToDoItem {
   text: string;

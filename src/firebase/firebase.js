@@ -1,7 +1,6 @@
+import { getAnalytics } from 'firebase/analytics';
 import firebase from 'firebase/compat/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAnalytics } from 'firebase/analytics';
-
 import firebaseConfig from './firebaseConfig';
 
 // Initialize Firebase

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-
 // Currently Firebase UI doesn't support Firebase SDK 9, so you must use the
 // compat import.
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import React, { useEffect, useState } from 'react';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 export type UserState = 'loading' | null | firebase.User;
 

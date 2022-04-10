@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import './firebase/firebase';
 import SignInScreen, { UserState } from './auth/signInScreen';
+import './firebase/firebase';
 import ToDoList from './to-do-list';
 
 function App() {
