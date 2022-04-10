@@ -25,6 +25,7 @@
 
 ## Deploying
 
-Run `firebase deploy`.
+1. Run `npm run bulid`.
+1. Run `firebase deploy`.
 
 Deploy URL: https://to-do-20da5.web.app
