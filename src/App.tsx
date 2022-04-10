@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import SignInScreen, { UserState } from './auth/signInScreen';
 import './firebase/firebase';
-import ToDoList from './to-do-list';
+import ToDoList from './ToDoList';
 
 function App() {
   const [user, setUser] = React.useState<UserState>('loading');
