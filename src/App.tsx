@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       To do
       <ToDoList user={user} />
-      <SignInScreen setUser={setUser} />
+      <SignInScreen user={user} setUser={setUser} />
     </div>
   );
 }

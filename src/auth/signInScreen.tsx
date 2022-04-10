@@ -2,7 +2,7 @@
 // compat import.
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 export type UserState = 'loading' | null | firebase.User;
@@ -16,24 +16,25 @@ const uiConfig = {
 };
 
 export default function SignInScreen({
+  user,
   setUser,
 }: {
+  user: UserState;
   setUser: (user: UserState) => void;
 }) {
-  const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
-
   // Listen to the Firebase Auth state and set the local state.
   useEffect(() => {
     const unregisterAuthObserver = firebase
       .auth()
       .onAuthStateChanged((user) => {
-        setIsSignedIn(!!user);
         setUser(user);
       });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, [setUser]);
 
-  if (!isSignedIn) {
+  if (user === 'loading') {
+    return null;
+  } else if (user == null) {
     return (
       <div style={{ border: '1px solid black' }}>
         <p>Please sign-in:</p>
@@ -43,14 +44,15 @@ export default function SignInScreen({
         />
       </div>
     );
+  } else {
+    return (
+      <div style={{ border: '1px solid black' }}>
+        <p>
+          Welcome {firebase.auth().currentUser?.displayName}. You are now
+          signed-in.
+        </p>
+        <button onClick={() => firebase.auth().signOut()}>Sign-out</button>
+      </div>
+    );
   }
-  return (
-    <div style={{ border: '1px solid black' }}>
-      <p>
-        Welcome {firebase.auth().currentUser?.displayName}. You are now
-        signed-in.
-      </p>
-      <button onClick={() => firebase.auth().signOut()}>Sign-out</button>
-    </div>
-  );
 }
