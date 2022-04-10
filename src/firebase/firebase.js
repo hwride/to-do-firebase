@@ -1,4 +1,5 @@
 import firebase from 'firebase/compat/app';
+import { getFirestore } from 'firebase/firestore';
 import { getAnalytics } from 'firebase/analytics';
 
 import firebaseConfig from './firebaseConfig';
@@ -9,3 +10,4 @@ import firebaseConfig from './firebaseConfig';
 // See: https://github.com/firebase/firebaseui-web/issues/837
 const app = firebase.initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+export const db = getFirestore(app);
