@@ -14,7 +14,7 @@ const uiConfig = {
   },
 };
 
-export default function SignInScreen() {
+export default function SignInScreen({ setUser }) {
   const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
 
   // Listen to the Firebase Auth state and set the local state.
@@ -23,6 +23,7 @@ export default function SignInScreen() {
       .auth()
       .onAuthStateChanged((user) => {
         setIsSignedIn(!!user);
+        setUser(user);
       });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);

@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { db } from './firebase/firebase';
 import { collection, getDocs, addDoc } from 'firebase/firestore';
+import firebase from 'firebase/compat';
 
 interface ToDoItem {
   text: string;
 }
 
-export default function ToDoList() {
+export default function ToDoList({ user }: { user: firebase.User | null }) {
   const [newToDoText, setNewToDoText] = useState('');
   const [todos, setTodos] = useState<ToDoItem[]>([]);
 
-  // Request to do items from the server.
+  // Request to do items from the server when logged in.
   useEffect(() => {
-    (async () => {
-      await getDocs(collection(db, 'todos')).then((todos) => {
-        console.log(todos);
+    if (user) {
+      (async () => {
+        const todos = await getDocs(collection(db, 'todos'));
         setTodos(todos.docs.map((doc) => doc.data() as ToDoItem));
-      });
-    })();
-  }, []);
+      })();
+    }
+  }, [user]);
 
   return (
     <div>
