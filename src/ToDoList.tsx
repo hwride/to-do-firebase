@@ -11,8 +11,10 @@ export default function ToDoList({ userState }: { userState: UserState }) {
   const [newToDoText, setNewToDoText] = useState('');
   const [todos, setTodos] = useState<ToDoItem[] | undefined>(undefined);
 
+  // The order of these conditions is important, as todos is null when the user
+  // is not signed in, but we don't want to display 'loading' when the user is
+  // not signed in.
   let state;
-  console.log('userState', userState);
   if (userState == 'not-signed-in') {
     state = 'not-signed-in';
   } else if (userState === 'loading' || todos == null) {
