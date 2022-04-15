@@ -1,3 +1,4 @@
+import firebase from 'firebase/compat/app';
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { UserState } from './auth/signInScreen';
@@ -27,8 +28,8 @@ export default function ToDoList({ userState }: { userState: UserState }) {
   useEffect(() => {
     if (userState === 'signed-in') {
       (async () => {
-        const todos = await getDocs(collection(db, 'todos'));
-        setTodos(todos.docs.map((doc) => doc.data() as ToDoItem));
+        const todos = await getToDos();
+        setTodos(todos);
       })();
     }
   }, [userState]);
@@ -65,9 +66,26 @@ export default function ToDoList({ userState }: { userState: UserState }) {
   }
 }
 
+async function getToDos() {
+  const currentUser = firebase.auth().currentUser;
+  if (!currentUser) {
+    console.error('Tried to get todo items, but there is no signed in user.');
+    return [];
+  }
+  const todos = await getDocs(collection(db, `users/${currentUser.uid}/todos`));
+  return todos.docs.map((doc) => doc.data() as ToDoItem);
+}
+
 async function addToDoItem(text: string) {
   try {
-    const col = collection(db, 'todos');
+    const currentUser = firebase.auth().currentUser;
+    if (!currentUser) {
+      console.error(
+        'Tried to add a todo item, but there is no signed in user.'
+      );
+      return;
+    }
+    const col = collection(db, `users/${currentUser.uid}/todos`);
     const docRef = await addDoc(col, {
       text,
     });
