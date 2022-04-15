@@ -25,7 +25,7 @@
 1. Run Firebase emulator: `firebase emulators:start`
 
 ## Deploying
-1. Run `npm run bulid`.
+1. Run `npm run build`.
 1. Run `firebase deploy`.
 
 Deploy URL: https://to-do-20da5.web.app
