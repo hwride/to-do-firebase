@@ -1,6 +1,6 @@
 import { getAnalytics } from 'firebase/analytics';
 import firebase from 'firebase/compat/app';
-import { getFirestore } from 'firebase/firestore';
+import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
 import firebaseConfig from './firebaseConfig';
 
 // Initialize Firebase
@@ -10,3 +10,9 @@ import firebaseConfig from './firebaseConfig';
 const app = firebase.initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 export const db = getFirestore(app);
+
+// Turn on emulator suite in development mode.
+const useEmulators = process.env.NODE_ENV === 'development';
+if (useEmulators) {
+  connectFirestoreEmulator(db, 'localhost', 8080);
+}
