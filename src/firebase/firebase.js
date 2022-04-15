@@ -15,4 +15,5 @@ export const db = getFirestore(app);
 const useEmulators = process.env.NODE_ENV === 'development';
 if (useEmulators) {
   connectFirestoreEmulator(db, 'localhost', 8080);
+  firebase.auth().useEmulator('http://localhost:9099');
 }
