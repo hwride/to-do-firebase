@@ -1,25 +1,10 @@
-import firebase from 'firebase/compat/app';
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  orderBy,
-  query,
-  serverTimestamp,
-} from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import SignInScreen from '../../auth/SignInScreen';
 import SignOutButton from '../../auth/SignOutButton';
 import { UserState } from '../../auth/useUserState';
-import { db } from '../../firebase/firebase';
+import { addToDo, deleteToDo, getToDos } from './firestoreToDo';
+import { ToDoItem } from './ToDoItem.type';
 import styles from './ToDoList.module.css';
-
-interface ToDoItem {
-  id: string;
-  text: string;
-}
 
 export default function ToDoList({ userState }: { userState: UserState }) {
   const [newToDoText, setNewToDoText] = useState('');
@@ -124,62 +109,4 @@ export default function ToDoList({ userState }: { userState: UserState }) {
       {userState === 'not-signed-in' && <SignInScreen />}
     </div>
   );
-}
-
-async function getToDos(): Promise<ToDoItem[]> {
-  const currentUser = firebase.auth().currentUser;
-  if (!currentUser) {
-    console.error('Tried to get todo items, but there is no signed in user.');
-    return [];
-  }
-  const todos = await getDocs(
-    query(
-      collection(db, `users/${currentUser.uid}/todos`),
-      orderBy('createdAt', 'asc')
-    )
-  );
-  return todos.docs.map(
-    (doc) =>
-      ({
-        id: doc.id,
-        ...doc.data(),
-      } as ToDoItem)
-  );
-}
-
-async function addToDo(text: string) {
-  try {
-    const currentUser = firebase.auth().currentUser;
-    if (!currentUser) {
-      console.error(
-        'Tried to add a todo item, but there is no signed in user.'
-      );
-      return;
-    }
-    const col = collection(db, `users/${currentUser.uid}/todos`);
-    const docRef = await addDoc(col, {
-      createdAt: serverTimestamp(),
-      text,
-    });
-    console.log('Document written with ID: ', docRef.id);
-  } catch (e) {
-    console.error('Error adding document: ', e);
-  }
-}
-
-async function deleteToDo(id: string) {
-  try {
-    const currentUser = firebase.auth().currentUser;
-    if (!currentUser) {
-      console.error(
-        'Tried to delete a todo item, but there is no signed in user.'
-      );
-      return;
-    }
-    const docRef = doc(db, `users/${currentUser.uid}/todos/${id}`);
-    await deleteDoc(docRef);
-    console.log('Document deleted with ID: ', docRef.id);
-  } catch (e) {
-    console.error('Error deleting document: ', e);
-  }
 }
