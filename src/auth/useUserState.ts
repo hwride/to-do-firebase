@@ -1,6 +1,7 @@
 import firebase from 'firebase/compat/app';
 import React, { useEffect } from 'react';
-import { UserState } from './signInScreen';
+
+export type UserState = 'loading' | 'not-signed-in' | 'signed-in';
 
 export function useUserState() {
   const [userState, setUserState] = React.useState<UserState>('loading');

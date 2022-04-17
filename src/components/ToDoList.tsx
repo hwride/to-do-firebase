@@ -7,7 +7,9 @@ import {
   getDocs,
 } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import SignInScreen, { UserState } from '../auth/signInScreen';
+import SignInScreen from '../auth/SignInScreen';
+import SignOutButton from '../auth/SignOutButton';
+import { UserState } from '../auth/useUserState';
 import { db } from '../firebase/firebase';
 import styles from './ToDoList.module.css';
 
@@ -101,10 +103,8 @@ export default function ToDoList({ userState }: { userState: UserState }) {
     <div className={styles.content}>
       <h1 className={styles.heading}>To do list</h1>
       {mainContent}
-      {/* Currently sign in login in SignInScreen must run for sign in to
-       init properly. Consider moving this out of the component and just using
-       the component of rendering. */}
-      <SignInScreen userState={userState} />
+      {userState === 'not-signed-in' && <SignInScreen />}
+      {userState === 'signed-in' && <SignOutButton />}
     </div>
   );
 }
