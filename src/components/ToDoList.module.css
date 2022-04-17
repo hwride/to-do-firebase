@@ -3,18 +3,21 @@
     max-width: 600px;
     margin: 0 auto;
     padding: var(--size-fluid-1);
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    border-left: 1px solid var(--gray-4);
+    border-right: 1px solid var(--gray-4);
 }
 
+/* Header */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: var(--size-2);
 }
 
 .heading {
-    font-size: var(--font-size-fluid-2);
+    font-size: var(--font-size-5);
+    font-weight: var(--font-weight-4);
     color: var(--blue-6);
 }
 
@@ -23,6 +26,7 @@
     display: flex;
     align-items: center;
     gap: var(--size-3);
+    margin-bottom: var(--size-2);
 }
 .addToDoInput {
     flex: 1;
@@ -33,7 +37,6 @@
 
 /* To do items */
 .toDoList {
-    margin-top: var(--size-2);
     padding: 0;
     list-style-type: none;
 }
