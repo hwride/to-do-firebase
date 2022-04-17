@@ -18,6 +18,7 @@
     color: var(--blue-6);
 }
 
+/* Add to do */
 .addToDoSection {
     display: flex;
     align-items: center;
@@ -28,4 +29,24 @@
 }
 .addToDoButton{
     white-space: nowrap;
+}
+
+/* To do items */
+.toDoList {
+    margin-top: var(--size-2);
+    padding: 0;
+    list-style-type: none;
+}
+.toDoItem {
+    max-inline-size: none;
+    display: flex;
+    align-items: center;
+    padding-block: var(--size-1);
+    border-bottom: var(--border-size-1) solid var(--gray-4);
+}
+li:last-of-type {
+    border-bottom: none;
+}
+.toDoCheckbox {
+    margin-right: var(--size-2);
 }

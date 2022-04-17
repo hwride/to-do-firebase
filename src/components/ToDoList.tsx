@@ -93,11 +93,15 @@ export default function ToDoList({ userState }: { userState: UserState }) {
             Add to do
           </button>
         </div>
-        <ul>
+        <ul className={styles.toDoList}>
           {todos!.map((todo) => {
             return (
-              <li key={todo.id}>
-                <input type="checkbox" onChange={() => onToDoChecked(todo)} />
+              <li key={todo.id} className={styles.toDoItem}>
+                <input
+                  type="checkbox"
+                  className={styles.toDoCheckbox}
+                  onChange={() => onToDoChecked(todo)}
+                />
                 {todo.text}
               </li>
             );
