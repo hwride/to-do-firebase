@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { useUserState } from './auth/useUserState';
-import ToDoList from './components/ToDoList';
+import ToDoList from './components/ToDoList/ToDoList';
 import './firebase/firebase';
 
 function App() {

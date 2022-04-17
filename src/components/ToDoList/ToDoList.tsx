@@ -10,10 +10,10 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import SignInScreen from '../auth/SignInScreen';
-import SignOutButton from '../auth/SignOutButton';
-import { UserState } from '../auth/useUserState';
-import { db } from '../firebase/firebase';
+import SignInScreen from '../../auth/SignInScreen';
+import SignOutButton from '../../auth/SignOutButton';
+import { UserState } from '../../auth/useUserState';
+import { db } from '../../firebase/firebase';
 import styles from './ToDoList.module.css';
 
 interface ToDoItem {
