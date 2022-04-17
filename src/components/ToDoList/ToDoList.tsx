@@ -69,9 +69,8 @@ export default function ToDoList({ userState }: { userState: UserState }) {
             type="text"
             value={newToDoText}
             aria-labelledby="add-to-do-button"
-            onChange={(event) => {
-              setNewToDoText(event.target.value);
-            }}
+            onKeyPress={(evt) => evt.key === 'Enter' && onAddToDoClick()}
+            onChange={(event) => setNewToDoText(event.target.value)}
           />
           <button
             id="add-to-do-button"
