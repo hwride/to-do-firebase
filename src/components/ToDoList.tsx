@@ -5,6 +5,9 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  orderBy,
+  query,
+  serverTimestamp,
 } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import SignInScreen from '../auth/SignInScreen';
@@ -129,7 +132,12 @@ async function getToDos(): Promise<ToDoItem[]> {
     console.error('Tried to get todo items, but there is no signed in user.');
     return [];
   }
-  const todos = await getDocs(collection(db, `users/${currentUser.uid}/todos`));
+  const todos = await getDocs(
+    query(
+      collection(db, `users/${currentUser.uid}/todos`),
+      orderBy('createdAt', 'asc')
+    )
+  );
   return todos.docs.map(
     (doc) =>
       ({
@@ -150,6 +158,7 @@ async function addToDo(text: string) {
     }
     const col = collection(db, `users/${currentUser.uid}/todos`);
     const docRef = await addDoc(col, {
+      createdAt: serverTimestamp(),
       text,
     });
     console.log('Document written with ID: ', docRef.id);
