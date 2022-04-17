@@ -10,6 +10,8 @@ interface ToDoItem {
 
 export default function ToDoList({ userState }: { userState: UserState }) {
   const [newToDoText, setNewToDoText] = useState('');
+  // Whether to do items should be updated.
+  const [updateToDos, setUpdateToDos] = useState(false);
   const [todos, setTodos] = useState<ToDoItem[] | undefined>(undefined);
 
   // The order of these conditions is important, as todos is null when the user
@@ -24,15 +26,31 @@ export default function ToDoList({ userState }: { userState: UserState }) {
     state = 'loaded';
   }
 
-  // Request to do items from the server when logged in.
+  // When the user signs in, we want to load the todos.
   useEffect(() => {
     if (userState === 'signed-in') {
-      (async () => {
-        const todos = await getToDos();
-        setTodos(todos);
-      })();
+      setUpdateToDos(true);
     }
   }, [userState]);
+
+  // Request to do items from the server when state says so.
+  useEffect(() => {
+    if (updateToDos) {
+      (async () => {
+        try {
+          const todos = await getToDos();
+          setTodos(todos);
+        } finally {
+          setUpdateToDos(false);
+        }
+      })();
+    }
+  }, [updateToDos]);
+
+  const addToDo = async () => {
+    await addToDoItem(newToDoText);
+    setUpdateToDos(true);
+  };
 
   if (state === 'not-signed-in') {
     return <div>Sign in to view to do items.</div>;
@@ -49,7 +67,7 @@ export default function ToDoList({ userState }: { userState: UserState }) {
               setNewToDoText(event.target.value);
             }}
           />
-          <button onClick={() => addToDoItem(newToDoText)}>Add to do</button>
+          <button onClick={addToDo}>Add to do</button>
         </div>
         <ul>
           {todos!.map((todo) => {
