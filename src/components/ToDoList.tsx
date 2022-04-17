@@ -1,8 +1,8 @@
 import firebase from 'firebase/compat/app';
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { UserState } from './auth/signInScreen';
-import { db } from './firebase/firebase';
+import { UserState } from '../auth/signInScreen';
+import { db } from '../firebase/firebase';
 
 interface ToDoItem {
   text: string;
