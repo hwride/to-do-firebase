@@ -46,7 +46,9 @@ export default function ToDoList({ userState }: { userState: UserState }) {
   }, [updateToDos]);
 
   const onAddToDoClick = async () => {
-    await addToDo(newToDoText);
+    const newToDoTextTrimmed = newToDoText.trim();
+    setNewToDoText('');
+    await addToDo(newToDoTextTrimmed);
     setUpdateToDos(true);
   };
 
