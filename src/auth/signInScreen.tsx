@@ -36,13 +36,7 @@ export default function SignInScreen({
     return null;
   } else if (userState == 'not-signed-in') {
     return (
-      <div style={{ border: '1px solid black' }}>
-        <p>Please sign-in:</p>
-        <StyledFirebaseAuth
-          uiConfig={uiConfig}
-          firebaseAuth={firebase.auth()}
-        />
-      </div>
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
     );
   } else {
     return (
