@@ -28,6 +28,9 @@ export default function ToDoList({ userState }: { userState: UserState }) {
   useEffect(() => {
     if (userState === 'signed-in') {
       setUpdateToDos(true);
+    } else if (userState === 'not-signed-in') {
+      // If you don't do this then when a user signs out and another signs in, the old to do items are briefly visible.
+      setTodos(undefined);
     }
   }, [userState]);
 
