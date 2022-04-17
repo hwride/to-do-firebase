@@ -16,8 +16,7 @@ interface ToDoItem {
   text: string;
 }
 
-export default function ToDoList() {
-  const [userState, setUserState] = React.useState<UserState>('loading');
+export default function ToDoList({ userState }: { userState: UserState }) {
   const [newToDoText, setNewToDoText] = useState('');
   // Whether to do items should be updated.
   const [updateToDos, setUpdateToDos] = useState(false);
@@ -105,7 +104,7 @@ export default function ToDoList() {
       {/* Currently sign in login in SignInScreen must run for sign in to
        init properly. Consider moving this out of the component and just using
        the component of rendering. */}
-      <SignInScreen userState={userState} setUserState={setUserState} />
+      <SignInScreen userState={userState} />
     </div>
   );
 }
