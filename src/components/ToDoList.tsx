@@ -101,10 +101,12 @@ export default function ToDoList({ userState }: { userState: UserState }) {
 
   return (
     <div className={styles.content}>
-      <h1 className={styles.heading}>To do list</h1>
+      <header className={styles.header}>
+        <h1 className={styles.heading}>To do list</h1>
+        {userState === 'signed-in' && <SignOutButton />}
+      </header>
       {mainContent}
       {userState === 'not-signed-in' && <SignInScreen />}
-      {userState === 'signed-in' && <SignOutButton />}
     </div>
   );
 }

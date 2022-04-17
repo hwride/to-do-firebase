@@ -3,6 +3,9 @@ import React, { useEffect } from 'react';
 
 export type UserState = 'loading' | 'not-signed-in' | 'signed-in';
 
+/**
+ * Note this component should only be used once, and it should be called in the root of the application.
+ */
 export function useUserState() {
   const [userState, setUserState] = React.useState<UserState>('loading');
 
@@ -14,7 +17,7 @@ export function useUserState() {
         setUserState(user != null ? 'signed-in' : 'not-signed-in');
       });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-  }, [setUserState]);
+  }, []);
 
   return userState;
 }
