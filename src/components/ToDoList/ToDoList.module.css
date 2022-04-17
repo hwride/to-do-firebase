@@ -30,9 +30,11 @@
 }
 .addToDoInput {
     flex: 1;
+    background: var(--input-surface);
 }
 .addToDoButton{
     white-space: nowrap;
+    background: var(--input-surface);
 }
 
 /* To do items */

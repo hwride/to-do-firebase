@@ -3,7 +3,15 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import React from 'react';
+import styles from './SignOutButton.module.css';
 
 export default function SignOutButton() {
-  return <button onClick={() => firebase.auth().signOut()}>Sign-out</button>;
+  return (
+    <button
+      className={styles.signOutButton}
+      onClick={() => firebase.auth().signOut()}
+    >
+      Sign-out
+    </button>
+  );
 }
