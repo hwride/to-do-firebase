@@ -1,0 +1,12 @@
+.content {
+    height: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.heading {
+    font-size: var(--font-size-fluid-2);
+    color: var(--blue-6);
+}

@@ -7,15 +7,17 @@ import {
   getDocs,
 } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { UserState } from '../auth/signInScreen';
+import SignInScreen, { UserState } from '../auth/signInScreen';
 import { db } from '../firebase/firebase';
+import styles from './ToDoList.module.css';
 
 interface ToDoItem {
   id: string;
   text: string;
 }
 
-export default function ToDoList({ userState }: { userState: UserState }) {
+export default function ToDoList() {
+  const [userState, setUserState] = React.useState<UserState>('loading');
   const [newToDoText, setNewToDoText] = useState('');
   // Whether to do items should be updated.
   const [updateToDos, setUpdateToDos] = useState(false);
@@ -64,12 +66,13 @@ export default function ToDoList({ userState }: { userState: UserState }) {
     setUpdateToDos(true);
   };
 
+  let mainContent;
   if (state === 'not-signed-in') {
-    return <div>Sign in to view to do items.</div>;
+    mainContent = <div>Sign in to view to do items.</div>;
   } else if (state === 'loading') {
-    return <div>Loading...</div>;
+    mainContent = <div>Loading...</div>;
   } else {
-    return (
+    mainContent = (
       <div>
         <div>
           <input
@@ -94,6 +97,17 @@ export default function ToDoList({ userState }: { userState: UserState }) {
       </div>
     );
   }
+
+  return (
+    <div className={styles.content}>
+      <h1 className={styles.heading}>To do list</h1>
+      {mainContent}
+      {/* Currently sign in login in SignInScreen must run for sign in to
+       init properly. Consider moving this out of the component and just using
+       the component of rendering. */}
+      <SignInScreen userState={userState} setUserState={setUserState} />
+    </div>
+  );
 }
 
 async function getToDos(): Promise<ToDoItem[]> {

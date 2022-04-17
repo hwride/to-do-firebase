@@ -1,0 +1,6 @@
+@import "open-props/style";
+@import "open-props/normalize";
+
+html, body, #root, .App {
+    height: 100%;
+}
