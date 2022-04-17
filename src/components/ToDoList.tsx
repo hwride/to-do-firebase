@@ -75,15 +75,23 @@ export default function ToDoList({ userState }: { userState: UserState }) {
   } else {
     mainContent = (
       <div>
-        <div>
+        <div className={styles.addToDoSection}>
           <input
+            className={styles.addToDoInput}
             type="text"
             value={newToDoText}
+            aria-labelledby="add-to-do-button"
             onChange={(event) => {
               setNewToDoText(event.target.value);
             }}
           />
-          <button onClick={onAddToDoClick}>Add to do</button>
+          <button
+            id="add-to-do-button"
+            className={styles.addToDoButton}
+            onClick={onAddToDoClick}
+          >
+            Add to do
+          </button>
         </div>
         <ul>
           {todos!.map((todo) => {

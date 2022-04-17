@@ -17,3 +17,15 @@
     font-size: var(--font-size-fluid-2);
     color: var(--blue-6);
 }
+
+.addToDoSection {
+    display: flex;
+    align-items: center;
+    gap: var(--size-3);
+}
+.addToDoInput {
+    flex: 1;
+}
+.addToDoButton{
+    white-space: nowrap;
+}
