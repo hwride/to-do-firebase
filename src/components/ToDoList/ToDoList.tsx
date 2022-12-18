@@ -130,7 +130,7 @@ function ThemeSwitcher() {
   return (
     <>
       <label htmlFor="theme-selector" className={styles.themeSelectorLabel}>
-        Display
+        Theme
       </label>
       <select
         id="theme-selector"
