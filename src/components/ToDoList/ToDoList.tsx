@@ -113,10 +113,7 @@ export default function ToDoList({ userState }: { userState: UserState }) {
         {mainContent}
         {userState === 'not-signed-in' && <SignInScreen />}
       </div>
-      <div>
-        <label htmlFor="theme-selector" className={styles.themeSelector}>
-          Display
-        </label>
+      <div className={styles.themeSelectorWrapper}>
         <ThemeSwitcher />
       </div>
     </div>
@@ -124,18 +121,29 @@ export default function ToDoList({ userState }: { userState: UserState }) {
 }
 
 function ThemeSwitcher() {
+  const [theme, setTheme] = useState(
+    window.matchMedia?.('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light'
+  );
+  console.log('theme', theme);
   return (
-    <select
-      id="theme-selector"
-      onChange={(evt) => {
-        document.documentElement.setAttribute(
-          'colour-scheme',
-          evt.target.value
-        );
-      }}
-    >
-      <option value="light">Light</option>
-      <option value="dark">Dark</option>
-    </select>
+    <>
+      <label htmlFor="theme-selector" className={styles.themeSelectorLabel}>
+        Display
+      </label>
+      <select
+        id="theme-selector"
+        value={theme}
+        onChange={(evt) => {
+          const newTheme = evt.target.value;
+          document.documentElement.setAttribute('colour-scheme', newTheme);
+          setTheme(newTheme);
+        }}
+      >
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </>
   );
 }
