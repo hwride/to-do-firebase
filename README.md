@@ -16,13 +16,14 @@
    1. Ensure Firebase CLI is installed `npm install -g firebase-tools`
    2. Login to Firebase: `firebase login`
 
-### On-going
+### Run in dev mode
+1. Run webpack: `npm run start`
+2. Run Firebase emulator: `firebase emulators:start`
+
+### Run with prod build
 1. Create a Webpack build: `npm run build`
 2. Run Firebase server: `firebase serve --only hosting`
    1. The Firebase server will serve the build folder created by Webpack.
-
-### Run emulators
-1. Run Firebase emulator: `firebase emulators:start`
 
 ## Deploying
 1. Run `npm run build`.
