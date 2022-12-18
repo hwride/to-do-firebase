@@ -109,8 +109,33 @@ export default function ToDoList({ userState }: { userState: UserState }) {
         <h1 className={styles.heading}>To do list</h1>
         {userState === 'signed-in' && <SignOutButton />}
       </header>
-      {mainContent}
-      {userState === 'not-signed-in' && <SignInScreen />}
+      <div className={styles.mainContent}>
+        {mainContent}
+        {userState === 'not-signed-in' && <SignInScreen />}
+      </div>
+      <div>
+        <label htmlFor="theme-selector" className={styles.themeSelector}>
+          Display
+        </label>
+        <ThemeSwitcher />
+      </div>
     </div>
+  );
+}
+
+function ThemeSwitcher() {
+  return (
+    <select
+      id="theme-selector"
+      onChange={(evt) => {
+        document.documentElement.setAttribute(
+          'colour-scheme',
+          evt.target.value
+        );
+      }}
+    >
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
   );
 }

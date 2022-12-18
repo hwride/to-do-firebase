@@ -10,10 +10,55 @@ html, body, #root, .App {
     --input-surface: var(--surface-3);
 }
 
-/* It would be nice not to have to overwrite stuff we're not changing. But if we don't seems like the above definition
- applies even in dark mode. */
+/* Light */
+[colour-scheme="light"] {
+    color-scheme: light;
+
+    --link: var(--indigo-7);
+    --link-visited: var(--grape-7);
+
+    --text-1: var(--gray-9);
+    --text-2: var(--gray-7);
+
+    --surface-1: white;
+    --surface-2: var(--gray-2);
+    --surface-3: var(--gray-3);
+    --surface-4: var(--gray-4);
+}
+[colour-scheme="light"] :where(textarea,select,input:not(button,button[type],input[type=button],input[type=submit],input[type=reset])) {
+    background-color: var(--surface-2);
+}
+
+/* Dark */
 @media (prefers-color-scheme: dark) {
     :where(html) {
+        color-scheme: dark;
+
+        --link: var(--indigo-3);
+        --link-visited: var(--grape-3);
+
+        --text-1: var(--gray-1);
+        --text-2: var(--gray-4);
+
         --surface-1: var(--gray-9);
+        --surface-2: var(--gray-8);
+        --surface-3: var(--gray-7);
+        --surface-4: var(--gray-6);
     }
+}
+
+/* It would be nice if we didn't need to duplicate this for the attribute selector */
+[colour-scheme="dark"] {
+    color-scheme: dark;
+
+    --link: var(--indigo-3);
+    --link-visited: var(--grape-3);
+
+    --text-1: var(--gray-1);
+    --text-2: var(--gray-4);
+
+    --surface-1: var(--gray-9);
+    --surface-2: var(--gray-8);
+    --surface-3: var(--gray-7);
+    --surface-4: var(--gray-6);
 }

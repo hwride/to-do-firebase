@@ -1,4 +1,6 @@
 .content {
+    display: flex;
+    flex-direction: column;
     height: 100%;
     max-width: 600px;
     margin: 0 auto;
@@ -19,6 +21,10 @@
     font-size: var(--font-size-5);
     font-weight: var(--font-weight-4);
     color: var(--blue-6);
+}
+
+.mainContent {
+    flex-grow: 1;
 }
 
 /* Add to do */
@@ -53,5 +59,10 @@ li:last-of-type {
     border-bottom: none;
 }
 .toDoCheckbox {
+    margin-right: var(--size-2);
+}
+
+/* Theme selector */
+.themeSelector {
     margin-right: var(--size-2);
 }
