@@ -62,7 +62,12 @@ export default function ToDoList({ userState }: { userState: UserState }) {
 
   let mainContent;
   if (state === 'not-signed-in') {
-    mainContent = <div>Sign in to view to do items.</div>;
+    mainContent = (
+      <>
+        <div>Sign in to view to do items.</div>
+        <SignInScreen />
+      </>
+    );
   } else if (state === 'loading') {
     mainContent = <div>Loading...</div>;
   } else {
@@ -109,10 +114,7 @@ export default function ToDoList({ userState }: { userState: UserState }) {
         <h1 className={styles.heading}>To do list</h1>
         {userState === 'signed-in' && <SignOutButton />}
       </header>
-      <div className={styles.mainContent}>
-        {mainContent}
-        {userState === 'not-signed-in' && <SignInScreen />}
-      </div>
+      <div className={styles.mainContent}>{mainContent}</div>
       <div className={styles.themeSelectorWrapper}>
         <ThemeSwitcher />
       </div>
