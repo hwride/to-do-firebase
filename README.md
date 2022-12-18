@@ -1,5 +1,9 @@
 # To do project
 
+## Deployment info
+Deploy URL: https://to-do-20da5.web.app/
+Firebase console: https://console.firebase.google.com/
+
 ## Technologies
 
 - Firebase (SDK 8, to be compatible with FirebaseUI)
