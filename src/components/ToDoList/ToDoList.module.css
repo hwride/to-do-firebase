@@ -24,7 +24,10 @@
 }
 
 .mainContent {
-    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
 }
 
 /* Add to do */
@@ -47,6 +50,9 @@
 .toDoList {
     padding: 0;
     list-style-type: none;
+    flex: 1;
+    overflow: auto;
+    margin-bottom: var(--size-2);
 }
 .toDoItem {
     max-inline-size: none;

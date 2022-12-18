@@ -67,7 +67,7 @@ export default function ToDoList({ userState }: { userState: UserState }) {
     mainContent = <div>Loading...</div>;
   } else {
     mainContent = (
-      <div>
+      <>
         <div className={styles.addToDoSection}>
           <input
             className={styles.addToDoInput}
@@ -99,7 +99,7 @@ export default function ToDoList({ userState }: { userState: UserState }) {
             );
           })}
         </ul>
-      </div>
+      </>
     );
   }
 
