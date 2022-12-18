@@ -3,9 +3,17 @@
 
 html, body, #root, .App {
     height: 100%;
-    background: white;
 }
 
-:root {
+:where(html) {
+    --surface-1: white;
     --input-surface: var(--surface-3);
+}
+
+/* It would be nice not to have to overwrite stuff we're not changing. But if we don't seems like the above definition
+ applies even in dark mode. */
+@media (prefers-color-scheme: dark) {
+    :where(html) {
+        --surface-1: var(--gray-9);
+    }
 }
