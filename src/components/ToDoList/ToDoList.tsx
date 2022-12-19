@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import SignInScreen from '../../auth/SignInScreen';
 import SignOutButton from '../../auth/SignOutButton';
 import { UserState } from '../../auth/useUserState';
@@ -64,7 +65,12 @@ export default function ToDoList({ userState }: { userState: UserState }) {
   if (state === 'not-signed-in') {
     mainContent = (
       <>
-        <div>Sign in to view to do items.</div>
+        <div>
+          <FormattedMessage
+            id="signInToViewText"
+            defaultMessage="Sign in to view to do items"
+          />
+        </div>
         <SignInScreen />
       </>
     );
@@ -87,7 +93,7 @@ export default function ToDoList({ userState }: { userState: UserState }) {
             className={styles.addToDoButton}
             onClick={onAddToDoClick}
           >
-            Add to do
+            <FormattedMessage id="addToDoButton" defaultMessage="Add to do" />
           </button>
         </div>
         <ul className={styles.toDoList}>
@@ -111,7 +117,9 @@ export default function ToDoList({ userState }: { userState: UserState }) {
   return (
     <div className={styles.content}>
       <header className={styles.header}>
-        <h1 className={styles.heading}>To do list</h1>
+        <h1 className={styles.heading}>
+          <FormattedMessage id="appTitle" defaultMessage="To do list default" />
+        </h1>
         {userState === 'signed-in' && <SignOutButton />}
       </header>
       <div className={styles.mainContent}>{mainContent}</div>
@@ -128,11 +136,11 @@ function ThemeSwitcher() {
       ? 'dark'
       : 'light'
   );
-  console.log('theme', theme);
+  const intl = useIntl();
   return (
     <>
       <label htmlFor="theme-selector" className={styles.themeSelectorLabel}>
-        Theme
+        <FormattedMessage id="themeButton" defaultMessage="Theme" />
       </label>
       <select
         id="theme-selector"
@@ -143,8 +151,19 @@ function ThemeSwitcher() {
           setTheme(newTheme);
         }}
       >
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
+        {/* For some reason FormattedMessage didn't work in the <option> elements */}
+        <option value="light">
+          {intl.formatMessage({
+            id: 'themeLight',
+            defaultMessage: 'Light',
+          })}
+        </option>
+        <option value="dark">
+          {intl.formatMessage({
+            id: 'themeDark',
+            defaultMessage: 'Dark',
+          })}
+        </option>
       </select>
     </>
   );
