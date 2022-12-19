@@ -3,12 +3,22 @@ import { FormattedMessage } from 'react-intl';
 import SignInScreen from '../../auth/SignInScreen';
 import SignOutButton from '../../auth/SignOutButton';
 import { UserState } from '../../auth/useUserState';
+import { LocaleSwitcher } from '../LanguageSwitcher/LocaleSwitcher';
+import { SupportedLocale } from '../LanguageSwitcher/type';
 import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher';
 import { addToDo, deleteToDo, getToDos } from './firestoreToDo';
 import { ToDoItem } from './ToDoItem.type';
 import styles from './ToDoList.module.css';
 
-export default function ToDoList({ userState }: { userState: UserState }) {
+export default function ToDoList({
+  userState,
+  locale,
+  setLocale,
+}: {
+  userState: UserState;
+  locale: SupportedLocale;
+  setLocale: (locale: SupportedLocale) => void;
+}) {
   const [newToDoText, setNewToDoText] = useState('');
   // Whether to do items should be updated.
   const [updateToDos, setUpdateToDos] = useState(false);
@@ -124,7 +134,8 @@ export default function ToDoList({ userState }: { userState: UserState }) {
         {userState === 'signed-in' && <SignOutButton />}
       </header>
       <div className={styles.mainContent}>{mainContent}</div>
-      <div className={styles.themeSelectorWrapper}>
+      <div className={styles.optionsWrapper}>
+        <LocaleSwitcher locale={locale} setLocale={setLocale} />
         <ThemeSwitcher />
       </div>
     </div>

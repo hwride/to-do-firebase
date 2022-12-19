@@ -1,5 +1,9 @@
 {
   "appTitle": "Liste de choses à faire",
+  "localeButton": "Langue",
+  "localeEn": "Anglais",
+  "localeFr": "français",
+  "localeRu": "Russe",
   "signInToViewText": "Connectez-vous pour voir les éléments à faire",
   "signOutButton": "Déconnexion",
   "addToDoButton": "Ajouter à faire",

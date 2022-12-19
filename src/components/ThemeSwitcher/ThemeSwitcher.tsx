@@ -10,7 +10,7 @@ export function ThemeSwitcher() {
   );
   const intl = useIntl();
   return (
-    <>
+    <div>
       <label htmlFor="theme-selector" className={styles.themeSelectorLabel}>
         <FormattedMessage id="themeButton" defaultMessage="Theme" />
       </label>
@@ -37,6 +37,6 @@ export function ThemeSwitcher() {
           })}
         </option>
       </select>
-    </>
+    </div>
   );
 }

@@ -3,16 +3,15 @@ import { IntlProvider } from 'react-intl';
 import './App.css';
 import { firebaseAuthButtonStyleOverrides } from './auth/SignInScreen';
 import { useUserState } from './auth/useUserState';
+import { SupportedLocale } from './components/LanguageSwitcher/type';
 import ToDoList from './components/ToDoList/ToDoList';
 import './firebase/firebase';
 
-type SupportedLocales = 'en' | 'fr' | 'ru';
-
 function App() {
   const userState = useUserState();
-  const [localeChoice, setLocaleChoice] = useState<SupportedLocales>('ru');
+  const [localeChoice, setLocaleChoice] = useState<SupportedLocale>('ru');
   const [localeLoaded, setLocaleLoaded] = useState<{
-    locale: SupportedLocales;
+    locale: SupportedLocale;
     messages: Record<string, string>;
   }>();
   useEffect(() => {
@@ -29,7 +28,11 @@ function App() {
     <IntlProvider locale={localeLoaded.locale} messages={localeLoaded.messages}>
       <div className="App">
         <style>{firebaseAuthButtonStyleOverrides}</style>
-        <ToDoList userState={userState} />
+        <ToDoList
+          userState={userState}
+          locale={localeLoaded.locale}
+          setLocale={setLocaleChoice}
+        />
       </div>
     </IntlProvider>
   ) : null;

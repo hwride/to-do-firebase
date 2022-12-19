@@ -69,10 +69,11 @@ li:last-of-type {
 }
 
 /* Theme selector */
-.themeSelectorWrapper {
+.optionsWrapper {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap: var(--size-3);
 }
 .themeSelectorLabel {
     margin-right: var(--size-2);
