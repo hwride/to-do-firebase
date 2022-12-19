@@ -9,7 +9,7 @@ import './firebase/firebase';
 
 function App() {
   const userState = useUserState();
-  const [localeChoice, setLocaleChoice] = useState<SupportedLocale>('ru');
+  const [localeChoice, setLocaleChoice] = useState<SupportedLocale>('en');
   const [localeLoaded, setLocaleLoaded] = useState<{
     locale: SupportedLocale;
     messages: Record<string, string>;
