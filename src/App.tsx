@@ -5,7 +5,7 @@ import { firebaseAuthButtonStyleOverrides } from './auth/SignInScreen';
 import { useUserState } from './auth/useUserState';
 import ToDoList from './components/ToDoList/ToDoList';
 import './firebase/firebase';
-import { enGB } from './translations/en-GB';
+import { enGB } from './lang/en-GB';
 
 function App() {
   const userState = useUserState();
