@@ -1,0 +1,9 @@
+{
+  "appTitle": "Список дел",
+  "signInToViewText": "Войдите чтобы увидеть элементы списка",
+  "signOutButton": "Выйти",
+  "addToDoButton": "Добавить элемент",
+  "themeButton": "Тема",
+  "themeLight": "Светлая",
+  "themeDark": "Темная"
+}
