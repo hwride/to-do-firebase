@@ -1,8 +1,9 @@
 # To do project
+Simple to do project to 
 
 ## Deployment info
-Deploy URL: https://to-do-20da5.web.app/
-Firebase console: https://console.firebase.google.com/
+- Deploy URL: https://to-do-20da5.web.app/
+- Firebase console: https://console.firebase.google.com/
 
 ## Technologies
 
@@ -11,6 +12,7 @@ Firebase console: https://console.firebase.google.com/
     - FirebaseUI
 - Create React App
 - TypeScript
+- [react-intl](https://github.com/formatjs/formatjs)
 
 ## Development setup
 
@@ -32,5 +34,3 @@ Firebase console: https://console.firebase.google.com/
 ## Deploying
 1. Run `npm run build`.
 1. Run `firebase deploy`.
-
-Deploy URL: https://to-do-20da5.web.app
