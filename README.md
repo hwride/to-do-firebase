@@ -7,6 +7,7 @@ Simple to do project to
 
 ## Technologies
 
+- [pnpm](https://pnpm.io/) for package management.
 - Firebase (SDK 8, to be compatible with FirebaseUI)
   - Firebase Auth
     - FirebaseUI
